@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/template.css">
+
+
+    <title>Welcome {{.Sale}}</title>
+</head>
+<body>
+<div class="account-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+            </div>
+            <div class="col-2">
+                <div class="form-container">
+                    <div class="form-btn">
+                        <span onclick="login()">Login</span>
+                        <span onclick="register()">Register</span>
+                        <hr id="Indicator">
+                    </div>
+                    <form id="LoginForm" method="post" action="/#">
+                        <input type="text" placeholder="Username" name="login">
+                        <input type="password" placeholder="Password" name="password">
+                        <button class="btn" type="submit">Login</button>
+                        <a href="http://localhost:8000/">Forgot password</a>
+                    </form>
+                    <form id="RegForm" method="post" action="/#">
+                        <input type="text" placeholder="Username" name="login">
+                        <input type="email" placeholder="Email" name="email">
+                        <input type="password" placeholder="Password" name="password">
+                        <input type="password" placeholder="Verify password" name="ver_pass">
+                        <button class="btn" type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var LoginForm = document.getElementById("LoginForm");
+    var RegForm = document.getElementById("RegForm");
+    var Indicator = document.getElementById("Indicator");
+    function register(){
+        RegForm.style.transform = "translateX(0px)";
+        LoginForm.style.transform = "translateX(0px)";
+        Indicator.style.transform = "translateX(100px)";
+    }
+    function login(){
+        RegForm.style.transform = "translateX(300px)";
+        LoginForm.style.transform = "translateX(300px)";
+        Indicator.style.transform = "translateX(0px)";
+    }
+
+
+</script>
+</html>
