@@ -6,3 +6,5 @@ Team member:
 Yerali Ussen  (alone hero)
 
 Second progress: created database and register function
+
+Third progress: imported database from open source codes, created login function. 
