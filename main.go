@@ -33,6 +33,12 @@ type Item struct {
 }
 
 func main() {
+	db, err := sql.Open("mysql", "root:EROMA35292(localhost:3306)/first")
+	if err != nil {
+		fmt.Println("error at the connecting db")
+		panic(err.Error())
+	}
+	defer db.Close()
 	welcome := Welcome{"Sale Begins Now", time.Now().Format(time.Stamp)}
 	template := template.Must(template.ParseFiles("template/template.html"))
 
