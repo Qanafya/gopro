@@ -65,13 +65,13 @@ func signUpUser(w http.ResponseWriter, r *http.Request) {
 	return
 }
 func logInUser(w http.ResponseWriter, r *http.Request) {
-	/*newUser := getUser(r)
+	newUser := getUser(r)
 	ok := users.DefaultUserService.VerifyUser(newUser)
 	if !ok {
-		http.Redirect(w, r, "/signfail", http.StatusSeeOther)
+		http.Redirect(w, r, "/loginfail", http.StatusSeeOther)
 		//t.ExecuteTemplate(w, filename, "User registration failure")
 		return
 	}
-	http.Redirect(w, r, "/signsuccess", http.StatusSeeOther)
-	return*/
+	http.Redirect(w, r, "/loginsuccess", http.StatusSeeOther)
+	return
 }
