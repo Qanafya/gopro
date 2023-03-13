@@ -2,9 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/template.css">
-
-
-    <title>Welcome {{.Sale}}</title>
+    <title>Welcome</title>
+    <h1>{{.}}</h1>
 </head>
 <body>
 <div class="account-page">
@@ -19,14 +18,14 @@
                         <span onclick="register()">Register</span>
                         <hr id="Indicator">
                     </div>
-                    <form id="LoginForm" method="POST">
-                        <input type="text" placeholder="Username" name="login">
+                    <form id="LoginForm" method="POST" action="/log-in">
+                        <input type="text" placeholder="Username" name="username">
                         <input type="password" placeholder="Password" name="password">
                         <button class="btn" type="submit">Login</button>
                         <a href="http://localhost:8000/">Forgot password</a>
                     </form>
-                    <form id="RegForm" method="POST">
-                        <input type="text" placeholder="Username" name="login">
+                    <form id="RegForm" method="POST" action="/signup">
+                        <input type="text" placeholder="Username" name="username">
                         <input type="email" placeholder="Email" name="email">
                         <input type="password" placeholder="Password" name="password">
                         <input type="password" placeholder="Verify password" name="verpass">
