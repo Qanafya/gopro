@@ -3,7 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
-	"users"
+	"https://github.com/Qanafya/gopro/users"
 )
 
 var tpl *template.Template
