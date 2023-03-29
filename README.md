@@ -3,7 +3,7 @@
 This is a demo web app. Next week i will upgrade it better.
 
 Team member:
-Yerali Ussen 200103214 (alone hero)__
+Yerali Ussen 200103214 (alone hero)<br />
 
 Second progress: created database and register function
 
