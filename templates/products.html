@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Products</title>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <a href="home.html"  class="shop">ShopLaptop</a>
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="account.html">Account</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </nav>
+        <a href="cart.html"> <img src="cart.png" width="30px" height="30px"> </a>
+        <img src="menu.png" class="menu-icon" onclick="menutoggle()">
+    </div>
+</div>
+<div class="small-container">
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select id="valuta" onclick="change()">
+            <option onclick="tenge()"> Tenge (KZT) </option>
+            <option onclick="dollar()"> Dollar (USD) </option>
+            <option onclick="euro()"> Euro (EU) </option>
+        </select>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <a href="product-details.html"> <img src="product-1.jpg"> </a>
+            <a href="product-details.html"> <h4>ASUS VivaBook</h4> </a>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">500.00</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-2.jpg"> </a>
+            <h4>Apple MacBook Pro</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">1250.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-3.jpg"> </a>
+            <h4>ASUS ROG gaming</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">1075.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">   <img src="product-4.jpg"> </a>
+            <h4>ASUS TUF gaming</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">1550.00</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <a href="product-details.html">   <img src="product-5.jpg"> </a>
+            <h4>Lenovo IdeaPad 3</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">570.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-6.jpg"> </a>
+            <h4>Acer Predator gaming</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">1250.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-7.jpg"> </a>
+            <h4>Acer Aspire 3</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">200.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-8.jpg"> </a>
+            <h4>Acer Nitro 5</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">800.00</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row" id="pix">
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-9.jpg"></a>
+            <h4>Lenovo IdeaPad 5</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">400.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-10.jpg"></a>
+            <h4>Apple MacBook Air</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">700.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html"> <img src="product-11.jpg"></a>
+            <h4>ASUS ZenBook</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-o"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">750.00</p>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <a href="product-details.html">  <img src="product-12.jpg"></a>
+            <h4>Acer Nitro 5</h4>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+            </div>
+            <div class="katar">
+                <p class="valu">$</p><p class="cost">900.00</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<footer>
+    <div class="waves">
+        <div class="wave" id="wave1"></div>
+        <div class="wave" id="wave2"></div>
+        <div class="wave" id="wave3"></div>
+        <div class="wave" id="wave4"></div>
+    </div>
+    <ul class="social_icon">
+        <li><a href=""><ion-icon name="logo-facebook"></ion-icon></a></li>
+        <li><a href=""><ion-icon name="logo-tiktok"></ion-icon></a></li>
+        <li><a href=""><ion-icon name="logo-instagram"></ion-icon></a></li>
+        <li><a href=""><ion-icon name="logo-twitter"></ion-icon></a></li>
+        <li><a href=""><ion-icon name="logo-github"></ion-icon></a></li>
+    </ul>
+    <ul class="menu">
+        <li><a href="">Home</a></li>
+        <li><a href="">Products</a></li>
+        <li><a href="">Account</a></li>
+        <li><a href="">About</a></li>
+        <li><a href="">Cart</a></li>
+    </ul>
+    <p>We are celling this site | All Rights Reserved</p>
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    var f = 0;
+
+
+    function change() {
+        var select = document.getElementById('valuta');
+        var value = select.options[select.selectedIndex].value;
+        if (value == "Tenge (KZT)") {
+            //  1  tenge
+            if (f == 0) {
+                for(var i=0; i<12; i++){
+                    var a=document.getElementsByClassName("cost")[i].innerHTML;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(a*440);
+                    document.getElementsByClassName("valu")[i].innerHTML="₸";
+                }
+                f = 1;
+            } else if (f == 2) {
+                for(var i=0; i<12; i++){
+                    var a=document.getElementsByClassName("cost")[i].innerHTML;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(a*500);
+                    document.getElementsByClassName("valu")[i].innerHTML="₸";
+                }
+                f = 1;
+            }
+        } else if (value == "Euro (EU)") {
+            //    2 euro
+            if (f == 0) {
+                for(var i=0; i<12; i++){
+                    var g=document.getElementsByClassName("cost")[i].innerHTML;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(g*440/500);
+                    document.getElementsByClassName("valu")[i].innerHTML="€";
+                }
+                f = 2;
+            } else if (f == 1) {
+                for(var i=0; i<12; i++){
+                    var g=document.getElementsByClassName("cost")[i].innerHTML;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(g/500);
+                    document.getElementsByClassName("valu")[i].innerHTML="€";
+                }
+                f = 2;
+            }
+        } else {
+            //   0 dollar
+            if (f == 1) {
+                for(var i=0; i<12; i++){
+                    var b=document.getElementsByClassName("cost")[i].innerHTML;
+                    b /= 440;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(b);
+                    document.getElementsByClassName("valu")[i].innerHTML="$";
+                }
+                f = 0;
+            } else if (f == 2) {
+                for(var i=0; i<12; i++){
+                    var b=document.getElementsByClassName("cost")[i].innerHTML;
+                    b /= 440;
+                    b *= 500;
+                    document.getElementsByClassName("cost")[i].innerHTML=Math.round(b);
+                    document.getElementsByClassName("valu")[i].innerHTML="$";
+                }
+                f = 0;
+            }
+        }
+    }
+    function bir() {
+        document.getElementById("bir").style.color="white";
+        document.getElementById("bir").style.borderColor="red";
+        //document.getElementById("bir").style.borderRadius = 3;
+    }
+</script>
+
+</body>
+</html>
