@@ -5,6 +5,7 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"html/template"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -20,6 +21,13 @@ type accounts struct {
 	users    string
 	email    string
 	password string
+}
+type Laptop struct {
+	id    int
+	name  string
+	star  float32
+	price float32
+	photo string
 }
 
 var e int
@@ -39,7 +47,27 @@ func main() {
 	})
 
 	http.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request) {
-		tpl.ExecuteTemplate(w, "products.html", nil)
+		rows, err := db.Query("SELECT * FROM laptops")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+
+		laptops := make([]Laptop, 0)
+		for rows.Next() {
+			var laptop Laptop
+			err := rows.Scan(&laptop.id, &laptop.name, &laptop.star, &laptop.price, &laptop.photo)
+			if err != nil {
+				log.Fatal(err)
+			}
+			laptops = append(laptops, laptop)
+		}
+		t, err := template.ParseFiles("templates/products.html")
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(laptops)
+		t.Execute(w, laptops)
 	})
 	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		//id := r.FormValue("id")
@@ -127,7 +155,6 @@ func main() {
 		fmt.Println("This is rows: ", account)
 		//tpl.ExecuteTemplate(w, "template.html", account)
 
-		// Render data as HTML table
 		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprint(w, "<table>")
 		for _, d := range account {
