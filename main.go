@@ -29,6 +29,12 @@ type Laptop struct {
 	price float32
 	photo string
 }
+type User struct {
+	id       int
+	users    string
+	email    string
+	password string
+}
 
 var e int
 
@@ -164,6 +170,37 @@ func main() {
 			fmt.Fprintf(w, "<tr>id: %d<br>username: %s<br>email: %s<br>password: %s<br><br></tr>", d.id, d.users, d.email, hash)
 		}
 		fmt.Fprint(w, "</table>")
+	})
+	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+		rows, err := db.Query("SELECT * FROM users")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+		users := make([]User, 0)
+		for rows.Next() {
+			var user User
+			err := rows.Scan(&user.id, &user.users, &user.email, &user.password)
+			if err != nil {
+				log.Fatal(err)
+			}
+			users = append(users, user)
+		}
+		tpl.ExecuteTemplate(w, "test.html", users)
+		fmt.Println(users)
+	})
+	http.HandleFunc("/db", func(w http.ResponseWriter, r *http.Request) {
+		laptop := Laptop{
+			id:    1,
+			name:  "HP",
+			star:  2,
+			price: 800,
+			photo: "asd",
+		}
+		tpl.ExecuteTemplate(w, "test2.html", laptop)
+	})
+	http.HandleFunc("/detail", func(w http.ResponseWriter, r *http.Request) {
+		tpl.ExecuteTemplate(w, "product-detail.html", nil)
 	})
 	http.ListenAndServe("localhost:8000", nil)
 }

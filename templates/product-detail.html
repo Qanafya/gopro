@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>HP laptop</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Fira Sans', sans-serif;
+    }
+    nav {
+      flex: 1;
+      text-align: right;
+    }
+    nav ul {
+      display: inline-block;
+      list-style-type: none;
+    }
+    nav ul li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    a {
+      text-decoration: none;
+      color: #555;
+    }
+    a:hover {
+      color: #3586ff;
+      transition: 0.4s ease;
+    }
+    p {
+      color: #555;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .col-2 {
+      flex-basis: 50%;
+      min-width: 300px;
+    }
+    .col-2 img {
+      max-width: 140%;
+      padding: 50px;
+      margin-left: -150px;
+    }
+    .col-2 h1 {
+      font-size: 50px;
+      line-height: 60px;
+      margin: 80px 0;
+    }
+    .col-2 .offer-img {
+      padding: 50px 50px 50px 0;
+      margin-left: -100px;
+    }
+    .btn {
+      display: inline-block;
+      background: #3586ff;
+      color: aliceblue;
+      padding: 8px 30px;
+      margin: 30px 0;
+      border-radius: 30px;
+      transition: 0.5s;
+    }
+    .btn:hover {
+      background: #0026ff;
+    }
+    .btn a{
+      color: white;
+    }
+    form .btn {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      margin: 10px 0;
+    }
+    form .btn:focus {
+      outline: none;
+    }
+    .header .row {
+      margin-top: 70px;
+    }
+    .col-3 img {
+      width: 100%;
+    }
+    .col-3 p {
+      font-size: 12px;
+      margin: 12px 0;
+      color: #777;
+    }
+    .small-container {
+      max-width: 1080px;
+      margin: auto;
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .col-4 {
+      flex-basis: 25%;
+      padding: 10px;
+      min-width: 200px;
+      margin-bottom: 50px;
+      transition: transform 0.5s;
+    }
+    .col-4 img {
+      width: 100%;
+    }
+    .col-4 p {
+      font-size: 14px;
+    }
+    .col-4:hover {
+      transform: translateY(-5px);
+    }
+    h4 {
+      color: #555;
+      font-weight: normal;
+    }
+    .rating .fa {
+      color: red;
+    }
+    small {
+      color: #555;
+    }
+    .testimonial .col-3 {
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.5s;
+    }
+    .testimonial .col-3 img {
+      width: 50px;
+      margin-top: 20px;
+      border-radius: 50%;
+    }
+    .col-5 img {
+      width: 100%;
+      filter: grayscale(100%);
+    }
+    .col-5 img:hover {
+      filter: grayscale(0);
+    }
+    ul {
+      list-style-type: none;
+    }
+    .app-logo img {
+      width: 140px;
+    }
+    @media only screen and (max-width: 800px) {
+      nav{
+        margin-bottom: 80px;
+        margin-top: -30px;
+      }
+      nav ul {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #333;
+        width: 100%;
+        overflow: hidden;
+        transition: max-height 0.5s;
+      }
+      nav ul li {
+        display: block;
+        margin-right: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      nav ul li a {
+        color: #fff;
+      }
+    }
+    .row-2 {
+      justify-content: space-between;
+      margin: 100px auto 50px;
+    }
+    select {
+      border: 1px solid #3586ff;
+      padding: 5px;
+    }
+    select:focus {
+      outline: none;
+    }
+    .page-btn span {
+      display: inline-block;
+      border: 1px solid #3586ff;
+      margin-left: 10px;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      transition: 0.4s ease;
+    }
+    .page-btn span:hover {
+      background: #3586ff;
+      color: #fff;
+    }
+    .single-product {
+      margin-top: 80px;
+    }
+    .single-product .col-2 img {
+      padding: 0;
+    }
+    .single-product .col-2 {
+      padding: 20px;
+    }
+    .single-product h4 {
+      margin: 20px 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .single-product select {
+      display: block;
+      margin: 10px;
+      margin-top: 20px;
+    }
+    .single-product input {
+      width: 50px;
+      height: 40px;
+      padding-left: 10px;
+      font-size: 20px;
+      margin-right: 10px;
+      border: 1px solid #3586ff;
+    }
+    input:focus {
+      outline: none;
+    }
+    .single-product .fa {
+      color: #3586ff;
+      margin-left: 10px;
+    }
+    .small-img-row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .small-img-col {
+      flex-basis: 24%;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th {
+      text-align: left;
+      padding: 5px;
+      color: #fff;
+      background: #3586ff;
+      font-weight: normal;
+    }
+    td {
+      padding: 10px 5px;
+    }
+    td input {
+      width: 40px;
+      height: 30px;
+      padding: 5px;
+    }
+    td a {
+      color: #3586ff;
+      font-size: 12px;
+    }
+    td img {
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+    }
+    td:last-child {
+      text-align: right;
+    }
+    .total-price table {
+      border-top: 3px solid #3586ff;
+      width: 100%;
+      max-width: 400px;
+    }
+    .form-container span {
+      font-weight: bold;
+      padding: 0 10px;
+      color: #555;
+      cursor: pointer;
+      width: 100px;
+      display: inline-block;
+    }
+    .form-container form {
+      max-width: 300px;
+      padding: 0 20px;
+      margin-top: -30px;
+      position: absolute;
+      top: 130px;
+      transition: transform 1s;
+    }
+    form input {
+      width: 100%;
+      height: 30px;
+      margin: 10px 0;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+    }
+    form a {
+      font-size: 12px;
+    }
+    .katar{
+      display: flex;
+      flex-wrap: wrap;
+    }
+    @media only screen and (max-width: 600px) {
+      .row {
+        text-align: center;
+      }
+      .col-2,
+      .col-4 {
+        flex-basis: 100%;
+      }
+      .single-product .row {
+        text-align: left;
+      }
+      .single-product .col-2 {
+        padding: 20px 0;
+      }
+      .single-product h1 {
+        font-size: 26px;
+        line-height: 32px;
+      }
+      .cart-info p {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+<div class="small-container single-product">
+  <div class="row">
+    <div class="col-2">
+      <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h2e/hc4/67236399185950/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-1.jpg" width="100%" id="ProductImg">
+      <div class="small-img-row">
+        <div class="small-img-col">
+          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h2e/hc4/67236399185950/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-1.jpg" width="100%" id="SmallImg">
+        </div>
+        <div class="small-img-col">
+          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h6b/he7/67236399448094/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-2.jpg" width="100%" id="SmallImg">
+        </div>
+        <div class="small-img-col">
+          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/hd0/h65/67236399710238/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-3.jpg" width="100%" id="SmallImg">
+        </div>
+        <div class="small-img-col">
+          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h04/h5c/67236396793886/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-4.jpg" width="100%" id="SmallImg">
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <p>Home / Laptops / HP</p>
+      <h1>HP Laptop 15</h1>
+      <div class="katar">
+        <h4>$</h4><h4 id='price'>750</h4>
+      </div>
+
+      <select>
+        <option>Select color</option>
+        <option>Black</option>
+        <option>White</option>
+        <option>Blue</option>
+        <option>Gray</option>
+      </select>
+      <input type="number" value="1" id='amount' onclick="pri()">
+      <a href="cart.html" class="btn"> Add To Cart</a>
+      <h3>Product Details <i class="fa fa-indent"></i> </h3>
+      <br>
+      <p>Laptop with a 15.6-inch screen, operating on the IPS matrix, which transmits colors with maximum accuracy,
+        has the greatest coverage of shades and fixed power consumption. Liquid crystals, of which it consists,
+        is practically not susceptible to wear. The presence of a special anti-glare coating allows you to work both with
+        artificial and natural light - it is very convenient if you like to spend time in public spaces. Thanks to this layer,
+        you can work comfortably with texts and numbers. The 2-core Intel Core i3 1115G4 processor with a frequency of 3.0 GHz
+        allows you to run various office and professional applications, explore Internet spaces, watch movies and TV shows and more
+
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="small-container">
+  <div class="row row-2">
+    <h2>Related Products</h2>
+    <p>View More</p>
+  </div>
+</div>
+
+
+
+<div class="small-container">
+
+  <div class="row">
+    <div class="col-4">
+      <a href="product-details.html">  <img src="product-9.jpg"></a>
+      <h4>Lenovo IdeaPad 5</h4>
+      <div class="rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+      </div>
+      <p>$400.00</p>
+    </div>
+    <div class="col-4">
+      <a href="product-details.html">  <img src="product-10.jpg"></a>
+      <h4>Apple MacBook Air</h4>
+      <div class="rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-half-o"></i>
+      </div>
+      <p>$700.00</p>
+    </div>
+    <div class="col-4">
+      <a href="product-details.html"> <img src="product-11.jpg"></a>
+      <h4>ASUS ZenBook</h4>
+      <div class="rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-half-o"></i>
+        <i class="fa fa-star-o"></i>
+      </div>
+      <p>$750.00</p>
+    </div>
+    <div class="col-4">
+      <a href="product-details.html">  <img src="product-12.jpg"></a>
+      <h4>Acer Nitro 5</h4>
+      <div class="rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+      </div>
+      <p>$900.00</p>
+    </div>
+  </div>
+
+
+</div>
+
+<script>
+  var ProductImg = document.getElementById("ProductImg");
+  var SmallImg = document.getElementById("SmallImg");
+  var price = document.getElementById("price");
+  var amount = document.getElementById("amount");
+  SmallImg[0].onclick = function(){
+    ProductImg.src = SmallImg[0].src;
+  }
+  SmallImg[1].onclick = function(){
+    ProductImg.src = SmallImg[1].src;
+  }
+  SmallImg[2].onclick = function(){
+    ProductImg.src = SmallImg[2].src;
+  }
+  SmallImg[3].onclick = function(){
+    ProductImg.src = SmallImg[3].src;
+  }
+  function pri() {
+    price.innerHTML = 750*amount.value;
+  }
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+
+</body>
+</html>
