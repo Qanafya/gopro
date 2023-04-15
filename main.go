@@ -22,6 +22,12 @@ type accounts struct {
 	email    string
 	password string
 }
+type comments struct {
+	id         int
+	product_id int
+	name       string
+	comment    string
+}
 type Laptop struct {
 	id    int
 	name  string
@@ -35,11 +41,19 @@ type User struct {
 	email    string
 	password string
 }
+type Comment struct {
+	id         int
+	product_id int
+	name       string
+	comment    string
+}
 
 var e int
+var ee int
 
 func main() {
 	fmt.Println("started")
+	ee = 0
 	db, err := sql.Open("mysql", "root:EROMA35292@tcp(localhost:3306)/first")
 	if err != nil {
 		fmt.Println("error at the connecting db")
@@ -170,6 +184,33 @@ func main() {
 			fmt.Fprintf(w, "<tr>id: %d<br>username: %s<br>email: %s<br>password: %s<br><br></tr>", d.id, d.users, d.email, hash)
 		}
 		fmt.Fprint(w, "</table>")
+	})
+	http.HandleFunc("/commed/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Inserting values")
+		product_id := r.FormValue("to_id")
+		name := r.FormValue("name")
+		comment := r.FormValue("comment")
+		ee = ee + 1
+		d, _ := db.Query("select * from comments")
+		defer d.Close()
+		var count []comments
+		for d.Next() {
+			var x comments
+			err = d.Scan(&x.id, &x.product_id, &x.name, &x.comment)
+			if err != nil {
+				panic(err)
+			}
+			count = append(count, x)
+		}
+		id := len(count) + 1
+
+		if ee%2 == 1 {
+			fmt.Println("e equals: ", e, "  length: ", len(comment))
+			fmt.Println("inserting id: ", id, " product_id: ", product_id, " name: ", name, " comment: ", comment)
+			rows, _ := db.Query("insert into comments(id, product_id, name, comment) values (?, ?, ?, ?)", id, product_id, name, comment)
+			defer rows.Close()
+		}
+		tpl.ExecuteTemplate(w, "template.html", "Successfully commented")
 	})
 	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		rows, err := db.Query("SELECT * FROM users")
