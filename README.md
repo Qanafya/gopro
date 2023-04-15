@@ -17,3 +17,5 @@ Fifth progress: saving a data without mysql, simple registration and authorizati
 Midterm 1: i couldn't push my midterm 1 to this repo, so i created new repository: https://github.com/Qanafya/gomid
 
 Sixth progress: added products page. This page displays the products that are for sale.
+
+Seventh and eighth progress: Added new product details page. And tested a insertions of values from database. 
