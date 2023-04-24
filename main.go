@@ -4,9 +4,11 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -29,11 +31,11 @@ type comments struct {
 	comment    string
 }
 type Laptop struct {
-	id    int
-	name  string
-	star  float32
-	price float32
-	photo string
+	Id    int
+	Name  string
+	Star  float32
+	Price float32
+	Photo string
 }
 type User struct {
 	id       int
@@ -47,11 +49,18 @@ type Comment struct {
 	name       string
 	comment    string
 }
+type Demo struct {
+	id     int
+	price  int
+	amount int
+}
 
 var e int
 var ee int
+var db *sql.DB
 
 func main() {
+	r := mux.NewRouter()
 	fmt.Println("started")
 	ee = 0
 	db, err := sql.Open("mysql", "root:EROMA35292@tcp(localhost:3306)/first")
@@ -62,11 +71,11 @@ func main() {
 	defer db.Close()
 	fmt.Println("connected")
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tpl.ExecuteTemplate(w, "template.html", nil)
 	})
 
-	http.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/products", func(w http.ResponseWriter, r *http.Request) {
 		rows, err := db.Query("SELECT * FROM laptops")
 		if err != nil {
 			log.Fatal(err)
@@ -76,7 +85,7 @@ func main() {
 		laptops := make([]Laptop, 0)
 		for rows.Next() {
 			var laptop Laptop
-			err := rows.Scan(&laptop.id, &laptop.name, &laptop.star, &laptop.price, &laptop.photo)
+			err := rows.Scan(&laptop.Id, &laptop.Name, &laptop.Star, &laptop.Price, &laptop.Photo)
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -89,7 +98,7 @@ func main() {
 		fmt.Println(laptops)
 		t.Execute(w, laptops)
 	})
-	http.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
 		//id := r.FormValue("id")
 		users := r.FormValue("username")
 		email := r.FormValue("email")
@@ -132,7 +141,7 @@ func main() {
 		}
 	})
 
-	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
 		users := r.FormValue("username")
 		password := r.FormValue("password")
 		rows, _ := db.Query("select * from users where users = ?", users)
@@ -158,7 +167,7 @@ func main() {
 			tpl.ExecuteTemplate(w, "login.html", "user not found")
 		}
 	})
-	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		soz := r.FormValue("search")
 		fmt.Println("This is soz:", soz)
 		rows, _ := db.Query("select * from users where users = ?", soz)
@@ -185,7 +194,7 @@ func main() {
 		}
 		fmt.Fprint(w, "</table>")
 	})
-	http.HandleFunc("/commed/", func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc("/commed/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Inserting values")
 		product_id := r.FormValue("to_id")
 		name := r.FormValue("name")
@@ -212,36 +221,108 @@ func main() {
 		}
 		tpl.ExecuteTemplate(w, "template.html", "Successfully commented")
 	})
-	http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-		rows, err := db.Query("SELECT * FROM users")
+	r.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+		rows, err := db.Query("SELECT * FROM laptops")
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer rows.Close()
-		users := make([]User, 0)
+
+		laptops := make([]Laptop, 0)
 		for rows.Next() {
-			var user User
-			err := rows.Scan(&user.id, &user.users, &user.email, &user.password)
+			var laptop Laptop
+			err := rows.Scan(&laptop.Id, &laptop.Name, &laptop.Star, &laptop.Price, &laptop.Photo)
 			if err != nil {
 				log.Fatal(err)
 			}
-			users = append(users, user)
+			laptops = append(laptops, laptop)
 		}
-		tpl.ExecuteTemplate(w, "test.html", users)
-		fmt.Println(users)
+		_, err = template.ParseFiles("templates/products.html")
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(laptops)
+		w.Header().Set("Content-Type", "text/html")
+		fmt.Fprint(w, "<table>")
+		for _, d := range laptops {
+			l := "http://localhost:8000/detail/" + strconv.Itoa(d.Id)
+			//l := "/detail/1"
+			//img := d.photo
+			fmt.Fprintf(w, "<tr>id: %d<br>Model: <a href=%s>%s</a><br>Price: %f<br>Rating: %f<br>Photo src: <img src=%s></img><br><br></tr>", d.Id, l, d.Name, d.Price, d.Star, d.Photo)
+		}
+		fmt.Fprint(w, "</table>")
+
+		/*rows, err := db.Query("SELECT * FROM demo")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+		demos := []Demo{}
+		for rows.Next() {
+			var demo Demo
+			err := rows.Scan(&demo.id, &demo.price, &demo.amount)
+			if err != nil {
+				log.Fatal(err)
+			}
+			demos = append(demos, demo)
+		}
+		tpl.ExecuteTemplate(w, "test.html", demos)
+		fmt.Println(demos)*/
 	})
-	http.HandleFunc("/db", func(w http.ResponseWriter, r *http.Request) {
-		laptop := Laptop{
-			id:    1,
-			name:  "HP",
-			star:  2,
-			price: 800,
-			photo: "asd",
+	r.HandleFunc("/db", func(w http.ResponseWriter, r *http.Request) {
+		laptop1 := Laptop{
+			Id:    1,
+			Name:  "HP",
+			Star:  2,
+			Price: 800,
+			Photo: "asd",
+		}
+		laptop2 := Laptop{
+			Id:    2,
+			Name:  "Dell",
+			Star:  3,
+			Price: 200,
+			Photo: "asd",
+		}
+		laptop := []Laptop{
+			laptop1,
+			laptop2,
 		}
 		tpl.ExecuteTemplate(w, "test2.html", laptop)
 	})
-	http.HandleFunc("/detail", func(w http.ResponseWriter, r *http.Request) {
+
+	r.HandleFunc("/detail/{id}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
+		rows, err := db.Query("SELECT * FROM laptops where id=?", id)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+
+		laptops := make([]Laptop, 0)
+		for rows.Next() {
+			var laptop Laptop
+			err := rows.Scan(&laptop.Id, &laptop.Name, &laptop.Star, &laptop.Price, &laptop.Photo)
+			if err != nil {
+				log.Fatal(err)
+			}
+			laptops = append(laptops, laptop)
+		}
+		fmt.Println(laptops)
+		w.Header().Set("Content-Type", "text/html")
+		fmt.Fprint(w, "<table>")
+		for _, d := range laptops {
+			l := "/detail/" + strconv.Itoa(d.Id)
+			//l := "/detail/1"
+			fmt.Fprintf(w, "<tr>id: %d<br>Model: <a href=%s>%s</a><br>Price: %f<br>Rating: %f<br>Photo src: <img src=%s></img><br><br></tr>", d.Id, l, d.Name, d.Price, d.Star, d.Photo)
+		}
+		fmt.Fprint(w, "</table>")
+	})
+
+	r.HandleFunc("/detail", func(w http.ResponseWriter, r *http.Request) {
 		tpl.ExecuteTemplate(w, "product-detail.html", nil)
 	})
-	http.ListenAndServe("localhost:8000", nil)
+	log.Fatal(http.ListenAndServe(":8000", r))
+
 }

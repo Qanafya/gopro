@@ -6,13 +6,12 @@
 </head>
 <body>
 This is Elon Musk: </br>
-
-
-{{range .}}
-{{.id}}
-{{.users}}
-{{.email}}
-{{.password}}
+{{range $key, $value := .}}
+    {{$key}}
+    бірінші
+    {{$value}}
+    екінші
+    үшінші
 {{end}}
 </body>
 </html>

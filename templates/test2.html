@@ -6,6 +6,10 @@
 </head>
 <body>
 This is not Elon Musk: </br>
-{{.}}
+{{range .}}
+    {{range .}}
+        {{.}}
+    {{end}}
+{{end}}
 </body>
 </html>
