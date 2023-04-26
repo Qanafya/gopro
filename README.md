@@ -1,4 +1,9 @@
-# Explanation, Midterm file is below:
+# Midterm 2:
+Added new features: comment items, rating items, filtering data.
+A user can comment and rate any items on the sale. 
+Also they can search item by filtering their price and rating.
+
+
 
 This is a demo web app. Next week i will upgrade it better.
 
