@@ -559,14 +559,11 @@
     <div class="row">
         {{range .}}
         <div class="col-4">
-            <a href="detail/{{.Id}}"> <img src="{{.Photo}}"> </a>
-            <a href="detail/{{.Id}}"> <h4>{{.Name}}</h4> </a>
+            <a href="/detail/{{.Id}}"> <img src="{{.Foto1}}"> </a>
+            <a href="/detail/{{.Id}}"> <h4>{{.Name}}</h4> </a>
             <div class="rating">
+                {{.Rating}}
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
             </div>
             <div class="katar">
                 <p class="valu">$</p><p class="cost">{{.Price}}</p>

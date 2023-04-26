@@ -180,7 +180,6 @@
   </style>
 </head>
 <body>
-<h1>{{.}}</h1>
 <div class="account-page">
   <div class="container">
     <div class="row">
@@ -192,6 +191,8 @@
             <span onclick="login()">Login</span>
             <span onclick="register()">Register</span>
             <hr id="Indicator">
+            </br>
+            <p style="color:red">{{.}}</p>
           </div>
           <form id="LoginForm" method="POST" action="/login">
             <input type="text" placeholder="Username" name="username">
@@ -200,7 +201,6 @@
             <a href="http://localhost:8000/">Forgot password</a>
           </form>
           <form id="RegForm" method="POST" action="/register">
-            <input type="number" placeholder="Id" name="id">
             <input type="text" placeholder="Username" name="username">
             <input type="email" placeholder="Email" name="email">
             <input type="password" placeholder="Password" name="password">

@@ -312,6 +312,9 @@
       display: flex;
       flex-wrap: wrap;
     }
+    .rating .fa {
+      color: red;
+    }
     @media only screen and (max-width: 600px) {
       .row {
         text-align: center;
@@ -353,32 +356,37 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 
-
+{{range .details}}
 <div class="small-container single-product">
   <div class="row">
     <div class="col-2">
-      <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h2e/hc4/67236399185950/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-1.jpg" width="100%" id="ProductImg">
+      <img src="{{.Foto1}}" width="100%" id="ProductImg">
       <div class="small-img-row">
         <div class="small-img-col">
-          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h2e/hc4/67236399185950/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-1.jpg" width="100%" id="SmallImg1" onclick="pr1()">
+          <img src="{{.Foto1}}" width="100%" id="SmallImg1" onclick="pr1()">
         </div>
         <div class="small-img-col">
-          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h6b/he7/67236399448094/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-2.jpg" width="100%" id="SmallImg2" onclick="pr2()">
+          <img src="{{.Foto2}}" width="100%" id="SmallImg2" onclick="pr2()">
         </div>
         <div class="small-img-col">
-          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/hd0/h65/67236399710238/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-3.jpg" width="100%" id="SmallImg3" onclick="pr3()">
+          <img src="{{.Foto3}}" width="100%" id="SmallImg3" onclick="pr3()">
         </div>
         <div class="small-img-col">
-          <img src="https://resources.cdn-kaspi.kz/shop/medias/sys_master/images/images/h04/h5c/67236396793886/acer-nitro-5-an515-57-nh-qeker-004-chernyi-108194028-4.jpg" width="100%" id="SmallImg4" onclick="pr4()">
+          <img src="{{.Foto4}}" width="100%" id="SmallImg4" onclick="pr4()">
         </div>
       </div>
     </div>
     <div class="col-2">
-      <p>Home / Laptops / HP</p>
-      <h1>HP Laptop 15</h1>
+      <p>Home / Laptops / {{.Name}}</p>
+      <h1>{{.Name}}</h1>
       <div class="katar">
-        <h4>$</h4><h4 id='price'>750</h4>
+        <h4>$</h4><h4 id='price'>{{.Price}}</h4>
       </div>
+      {{end}}
+      {{range .rats}}
+      Rating of out 5:   <i class="fa fa-star"></i>  {{.Rating}}
+      {{end}}
+      {{range .details}}
 
       <select>
         <option>Select color</option>
@@ -391,17 +399,19 @@
       <a href="cart.html" class="btn"> Add To Cart</a>
       <h3>Product Details <i class="fa fa-indent"></i> </h3>
       <br>
-      <p>Laptop with a 15.6-inch screen, operating on the IPS matrix, which transmits colors with maximum accuracy,
-        has the greatest coverage of shades and fixed power consumption. Liquid crystals, of which it consists,
-        is practically not susceptible to wear. The presence of a special anti-glare coating allows you to work both with
-        artificial and natural light - it is very convenient if you like to spend time in public spaces. Thanks to this layer,
-        you can work comfortably with texts and numbers. The 2-core Intel Core i3 1115G4 processor with a frequency of 3.0 GHz
-        allows you to run various office and professional applications, explore Internet spaces, watch movies and TV shows and more
+      <p>
+        {{.Desc}}
 
-      </p>
+      </p></br>
+      <form action="/rate/" method="post">
+        <input type="hidden" value="{{.Id}}" name="product_id">
+        <input type="number" name="rating" max="5" min="1">
+        <button type="submit">Rate</button>
+      </form>
     </div>
   </div>
 </div>
+{{end}}
 <div class="small-container">
   <div class="row row-3">
     <h2>Comments</h2>
@@ -410,10 +420,27 @@
 
 
 <div class="small-container">
+  {{range .comments}}
+  <div class="small-container">
+    <div class="row-row-2">
+      <p> </p>
+      <p class="com-name">{{.Name}}</p>
+      <hr>
+      <p>{{.Comment}}</p>
+      <p> </p>
+      </br>
+      </br>
+      </br>
+      <p></p>
+    </div>
+  </div>
+  {{end}}
   <div class="bor">
     <div class="row-row-2">
       <form method="post" action="/commed/">
-        <input type="hidden" name="to_id", value="1" class="zer">
+        {{range .details}}
+        <input type="hidden" name="to_id", value="{{.Id}}" class="zer">
+        {{end}}
         <p></p>
         <p>Your name is</p>
         <input type="text" name="name">

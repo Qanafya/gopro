@@ -180,17 +180,43 @@
     </style>
 </head>
 <body>
-<div class="account-page">
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-            </div>
-            <div class="col-2">
-                <h1>{{.}}</h1>
-                <a href="/"><button>Home page</button></a>
+<form action="/filter/" method="post">
+    <div class="account-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    </div>
+                        <div class="col-2">
+                            <h2>{{.}}</h2>
+                            <a href="/products"><h2>Get products</h2></a></br></br></br></br>
+                            <p>Get products up to price:</p>
+                            <input id="pr_input" type="range" min="0" max="2000" step="50" name="price">
+                            <p>Value: <output id="pr_value"></output></p></br>
+
+                            <p>Get products up to rating:</p>
+                            <input id="ra_input" type="range" min="1" max="5" step="1" name="rating">
+                            <p>Value: <output id="ra_value"></output></p></br>
+                            <a href="/"><button type="submit">Filter</button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 </body>
+<script>
+    const value = document.querySelector("#pr_value")
+    const input = document.querySelector("#pr_input")
+    value.textContent = input.value
+    input.addEventListener("input", (event) => {
+        value.textContent = event.target.value
+    })
+    const value2 = document.querySelector("#ra_value")
+    const input2 = document.querySelector("#ra_input")
+    value2.textContent = input2.value
+    input2.addEventListener("input", (event) => {
+        value2.textContent = event.target.value
+    })
+</script>
 </html>
