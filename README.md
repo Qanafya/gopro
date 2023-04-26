@@ -21,3 +21,5 @@ Sixth progress: added products page. This page displays the products that are fo
 Seventh and eighth progress: Added new product details page. And tested a insertions of values from database. 
 
 Nineth progress: users can comment to the products and will record to db
+
+Tenth progress: products page connected with database. It will show products from the db.
