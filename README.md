@@ -3,7 +3,7 @@ Added new features: comment items, rating items, filtering data.<br />
 A user can comment and rate any items on the sale. <br />
 Also they can search item by filtering their price and rating.<br />
 Explanation video: https://www.tiny.cc/qanafyamidterm <br />
-If you have questions you can write in telegram @qanafya.<br /><hr><br /><br />
+If you have questions you can write in telegram @qanafya.<br /><hr><br />
 
 
 
