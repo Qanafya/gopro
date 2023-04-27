@@ -1,7 +1,9 @@
 # Midterm 2:
-Added new features: comment items, rating items, filtering data.
-A user can comment and rate any items on the sale. 
-Also they can search item by filtering their price and rating.
+Added new features: comment items, rating items, filtering data.</ br>
+A user can comment and rate any items on the sale. </ br>
+Also they can search item by filtering their price and rating.</ br>
+https://www.youtube.com/watch?v=jFO2cb23PvM </ br>
+If you have questions you can write in telegram @qanafya.
 
 
 
