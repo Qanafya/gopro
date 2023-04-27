@@ -9,7 +9,7 @@ If you have questions you can write in telegram @qanafya.<br /><hr><br />
 
 Team member:
 Yerali Ussen 200103214 (alone hero)<br />
- <br />
+ <br /><br />
 
 Second progress: created database and register function
 
