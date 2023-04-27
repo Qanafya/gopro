@@ -7,8 +7,6 @@ If you have questions you can write in telegram @qanafya.<br /><hr><br />
 
 
 
-This is a demo web app. Next week i will upgrade it better.
-
 Team member:
 Yerali Ussen 200103214 (alone hero)<br />
  <br />
