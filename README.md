@@ -1,10 +1,15 @@
-# Explanation, Midterm file is below:
+# Midterm 2:
+Added new features: comment items, rating items, filtering data.<br />
+A user can comment and rate any items on the sale. <br />
+Also they can search item by filtering their price and rating.<br />
+Explanation video: https://www.tiny.cc/qanafyamidterm <br />
+If you have questions you can write in telegram @qanafya.<br /><hr><br />
 
-This is a demo web app. Next week i will upgrade it better.
+
 
 Team member:
 Yerali Ussen 200103214 (alone hero)<br />
- <br />
+ <br /><br />
 
 Second progress: created database and register function
 
