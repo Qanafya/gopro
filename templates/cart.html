@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Buy</title>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    body {
+    font-family: 'Fira Sans', sans-serif;
+    }
+    .navbar {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    }
+    nav {
+    flex: 1;
+    text-align: right;
+    }
+    nav ul {
+    display: inline-block;
+    list-style-type: none;
+    }
+    nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+    }
+    a {
+    text-decoration: none;
+    color: #555;
+    }
+    a:hover {
+    color: #3586ff;
+    transition: 0.4s ease;
+    }
+    p {
+    color: #555;
+    }
+    .container {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    }
+    .row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    }
+    .col-2 {
+    flex-basis: 50%;
+    min-width: 300px;
+    }
+    .col-2 img {
+    max-width: 140%;
+    padding: 50px;
+    margin-left: -150px;
+    }
+
+    .col-2 h1 {
+    font-size: 50px;
+    line-height: 60px;
+    margin: 80px 0;
+    }
+    .col-2 .offer-img {
+    padding: 50px 50px 50px 0;
+    margin-left: -100px;
+    }
+    .btn {
+    display: inline-block;
+    background: #3586ff;
+    color: aliceblue;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: 0.5s;
+    }
+    .btn:hover {
+    background: #0026ff;
+    }
+    .btn a{
+    color: white;
+    }
+    form .btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    margin: 10px 0;
+    }
+    form .btn:focus {
+    outline: none;
+    }
+    .header {
+    background: radial-gradient(#fff, #ffd6d6);
+    }
+    .header .row {
+    margin-top: 70px;
+    }
+    .categories {
+    margin: 70px 0;
+    }
+    .col-3 {
+    flex-basis: 30%;
+    min-width: 250px;
+    margin-bottom: 30px;
+    }
+    .col-3 img {
+    width: 100%;
+    }
+    .col-3 p {
+    font-size: 12px;
+    margin: 12px 0;
+    color: #777;
+    }
+    .small-container {
+    max-width: 1080px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    }
+    .col-4 {
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+    }
+    .col-4 img {
+    width: 100%;
+    }
+    .col-4 p {
+    font-size: 14px;
+    }
+    .col-4:hover {
+    transform: translateY(-5px);
+    }
+    .title {
+    text-align: center;
+    margin: 0 auto 80px;
+    position: relative;
+    line-height: 60px;
+    color: #555;
+    }
+    .title::after {
+    content: '';
+    background: #3586ff;
+    width: 80px;
+    height: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+    h4 {
+    color: #555;
+    font-weight: normal;
+    }
+    .rating .fa {
+    color: red;
+    }
+    .offer {
+    background: radial-gradient(#fff, #ffd6d6);
+    margin-top: 80px;
+    padding: 30px 0;
+    }
+    small {
+    color: #555;
+    }
+    .testimonial {
+    padding-top: 100px;
+    }
+    .testimonial .col-3 {
+    text-align: center;
+    padding: 40px 20px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.5s;
+    }
+    .testimonial .col-3 img {
+    width: 50px;
+    margin-top: 20px;
+    border-radius: 50%;
+    }
+    .testimonial .col-3:hover {
+    transform: translateY(-10px);
+    }
+    .testimonial .col-3:h3 {
+    font-weight: 600;
+    color: #555;
+    font-size: 16px;
+    }
+    .fa.fa-quote-left {
+    font-size: 34px;
+    color: #3586ff;
+    }
+    .brands {
+    margin: 100px auto;
+    }
+    .col-5 {
+    width: 160px;
+    }
+    .col-5 img {
+    width: 100%;
+    filter: grayscale(100%);
+    }
+    .col-5 img:hover {
+    filter: grayscale(0);
+    }
+    .logo{
+    font-size: 30px;
+    }
+    ul {
+    list-style-type: none;
+    }
+    .app-logo {
+    margin-top: 20px;
+    }
+    .app-logo img {
+    width: 140px;
+    }
+    .done-by {
+    text-align: center;
+    }
+    .menu-icon {
+    width: 28px;
+    margin-left: 20px;
+    display: none;
+    }
+    @media only screen and (max-width: 800px) {
+    nav{
+    margin-bottom: 80px;
+    margin-top: -30px;
+    }
+    nav ul {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background: #333;
+    width: 100%;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    }
+    nav ul li {
+    display: block;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+    nav ul li a {
+    color: #fff;
+    }
+    .menu-icon {
+    display: block;
+    cursor: pointer;
+    }
+    }
+    .row-2 {
+    justify-content: space-between;
+    margin: 100px auto 50px;
+    }
+    .row-2 h3{
+    font-weight: bold;
+    font-size: 60px;
+    color: red;
+    margin-bottom: 10px;
+    }
+    .row-3 {
+    justify-content: space-between;
+    margin: 50px auto 0px;
+    }
+    .in {
+    font-size: 24px;
+    }
+    .inb{
+    font-size: 24px;
+    width: 100px;
+    height: 40px;
+    }
+
+    select {
+    border: 1px solid #3586ff;
+    padding: 5px;
+    }
+    select:focus {
+    outline: none;
+    }
+    .page-btn {
+    margin: 0 auto 80px;
+    }
+    .page-btn span {
+    display: inline-block;
+    border: 1px solid #3586ff;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: 0.4s ease;
+    }
+    .page-btn span:hover {
+    background: #3586ff;
+    color: #fff;
+    }
+    .single-product {
+    margin-top: 80px;
+    }
+    .single-product .col-2 img {
+    padding: 0;
+    }
+    .single-product .col-2 {
+    padding: 20px;
+    }
+    .single-product h4 {
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+    }
+    .single-product select {
+    display: block;
+    margin: 10px;
+    margin-top: 20px;
+    }
+    #menuItems {
+    font-size: 25px;
+    }
+    .single-product input {
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #3586ff;
+    }
+    input:focus {
+    outline: none;
+    }
+    .single-product .fa {
+    color: #3586ff;
+    margin-left: 10px;
+    }
+    .small-img-row {
+    display: flex;
+    justify-content: space-between;
+    }
+    .small-img-col {
+    flex-basis: 24%;
+    cursor: pointer;
+    }
+    .cart-page {
+    margin: 80px auto;
+    }
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    }
+    .cart-info {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    th {
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #3586ff;
+    font-weight: normal;
+    }
+    td {
+    padding: 10px 5px;
+    }
+    td input {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    }
+    td a {
+    color: #3586ff;
+    font-size: 12px;
+    }
+    td img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    }
+    td:last-child {
+    text-align: right;
+    }
+    .total-price {
+    display: flex;
+    justify-content: flex-end;
+    }
+    .total-price table {
+    border-top: 3px solid #3586ff;
+    width: 100%;
+    max-width: 400px;
+    }
+    .account-page {
+    padding: 50px 0;
+    background: radial-gradient(#fff, #ffd6d6);
+    }
+    .form-container {
+    background: #fff;
+    width: 300px;
+    height: 400px;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    }
+    .form-container span {
+    font-weight: bold;
+    padding: 0 10px;
+    color: #555;
+    cursor: pointer;
+    width: 100px;
+    display: inline-block;
+    }
+    .form-container form {
+    max-width: 300px;
+    padding: 0 20px;
+    margin-top: -30px;
+    position: absolute;
+    top: 130px;
+    transition: transform 1s;
+    }
+    .form-btn {
+    display: inline-block;
+    }
+    form input {
+    width: 100%;
+    height: 30px;
+    margin: 10px 0;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    }
+    #LoginForm {
+    left: -300px;
+    }
+    #RegForm {
+    left: 0;
+    }
+    form a {
+    font-size: 12px;
+    }
+    #Indicator {
+    width: 100px;
+    border: none;
+    background: #3586ff;
+    height: 3px;
+    margin-top: 8px;
+    transform: translateX(100px);
+    transition: transform 1s;
+    }
+    footer {
+    position: relative;
+    min-height: 100%;
+    background-color: #3586ff;
+    min-height: 100px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 150px;
+    }
+    footer .social_icon,
+    footer .menu {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+    }
+    footer .social_icon li a{
+    font-size: 2em;
+    color: white;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.5s;
+    }
+    footer .social_icon li a:hover {
+    transform: translateY(-10px);
+    }
+    footer .menu li a{
+    font-size: 1.2em;
+    color: white;
+    margin: 0 10px;
+    display: inline-block;
+    opacity: 0.7;
+    }
+    footer .menu li a:hover {
+    opacity: 1;
+    }
+    footer p {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    }
+    footer .wave {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('https://sun9-58.userapi.com/s/v1/if2/DLQKpD9poYfc0ueXpA8FJgry3GctWpHrDrrCsXK5MpdCqGRUjIzZhP_nR6FkYfP-ia6P3w0N8gSpQ1aUayY1nFKn.jpg?size=1280x129&quality=95&type=album');
+    background-size: 1000px 100px;
+    }
+    footer .wave#wave1{
+    z-index: 1000;
+    opacity: 1;
+    bottom: 0;
+    animation: animateWave 4s linear infinite;
+    }
+    footer .wave#wave2{
+    z-index: 1000;
+    opacity: 0.6;
+    bottom: 10px;
+    animation: animateWave2 4s linear infinite;
+    }
+    footer .wave#wave3{
+    z-index: 1000;
+    opacity: 0.4;
+    bottom: 15px;
+    animation: animateWave 3s linear infinite;
+    }
+    footer .wave#wave4{
+    z-index: 999;
+    opacity: 0.8;
+    bottom: 20px;
+    animation: animateWave2 3s linear infinite;
+    }
+    @keyframes animateWave{
+    0%
+    {
+    background-position-x: 1000px;
+    }
+    100%
+    {
+    background-position-x: 0;
+    }
+    }
+    @keyframes animateWave2{
+    0%
+    {
+    background-position-x: 0;
+    }
+    100%
+    {
+    background-position-x: 1000px;
+    }
+    }
+    #pix{
+    margin-bottom: 100px;
+    }
+    .katar{
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .shop{
+    border: 4px solid red;
+    }
+    @media only screen and (max-width: 600px) {
+    .row {
+    text-align: center;
+    }
+    .col-2,
+    .col-3,
+    .col-4 {
+    flex-basis: 100%;
+    }
+    .single-product .row {
+    text-align: left;
+    }
+    .single-product .col-2 {
+    padding: 20px 0;
+    }
+    .single-product h1 {
+    font-size: 26px;
+    line-height: 32px;
+    }
+    .cart-info p {
+    display: none;
+    }
+    }
+    .com-name{
+    color: red;
+    }
+    .zer{
+    font-size: 0px; width: 0px; height: 0px;
+    }
+    .bor{
+    border: 1px solid black;
+    margin-top: 40px;
+    padding: 0px 10px 0 10px;
+    }
+    .bor button {
+    font-size: 20px;
+    margin-left: 450px;
+    margin-bottom: 10px;
+    }
+    .tes{
+    font-size: 18px;
+    width: 100px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<div class="container">
+  <div class="navbar">
+    <div class="logo">
+      <a href="home.html"  class="shop">ShopLaptop</a>
+    </div>
+    <nav>
+      <ul id="MenuItems">
+        <li><a href="#">Home</a></li>
+        <li><a href="http://localhost:8000/products">Products</a></li>
+        <li><a href="http://localhost:8000">Account</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="http://localhost:8000/sell/">Sell</a></li>
+      </ul>
+    </nav>
+    <a href="http://localhost:8000/cart/"> <img src="https://sun9-26.userapi.com/impg/s7IRyyulhGjikaeJuDXMOvHGsA3qGlPRj4_DKg/v89jwdUunHE.jpg?size=807x807&quality=95&sign=a886431d7c21d9024f464c61b19344ed&c_uniq_tag=WEntVar6wY0TlhHKLDo3pGaS5VturO_BCxxhMNkfEUk&type=album" width="30px" height="30px"> </a>
+    <img src="menu.png" class="menu-icon" onclick="menutoggle()">
+  </div>
+</div>
+
+<div class="small-container cart-page">
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+{{range .}}
+    <tr>
+      <td>
+        <div class="cart-info">
+          <img src="{{.Foto1}}">
+          <div>
+            <p>{{.Name}}</p>
+            <small>Price: ${{.Price}}</small>
+            <br>
+            <a href="http://localhost:8000/dele/{{.Id}}">Remove</a>
+          </div>
+        </div>
+      </td>
+      <td><input type="number" value="{{.Amount}}" min="0" max="5" class="cost" onclick="total()" id="amount"></td>
+      <td id="proce">${{.Price}}</td>
+    </tr>
+{{end}}
+  </table>
+  <div class="total-price">
+    <table>
+      <tr>
+        <td>Subtotal</td>
+        <td id ="tot">0</td>
+      </tr>
+      <tr>
+        <td>Tax</td>
+        <td id="tax">0</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td id="withtax">570</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  <ul class="social_icon">
+    <li><a href=""><ion-icon name="logo-facebook"></ion-icon></a></li>
+    <li><a href=""><ion-icon name="logo-tiktok"></ion-icon></a></li>
+    <li><a href=""><ion-icon name="logo-instagram"></ion-icon></a></li>
+    <li><a href=""><ion-icon name="logo-twitter"></ion-icon></a></li>
+    <li><a href=""><ion-icon name="logo-github"></ion-icon></a></li>
+  </ul>
+  <ul class="menu">
+    <li><a href="">Home</a></li>
+    <li><a href="">Products</a></li>
+    <li><a href="">Account</a></li>
+    <li><a href="">About</a></li>
+    <li><a href="">Cart</a></li>
+  </ul>
+  <p>We are celling this site | All Rights Reserved</p>
+</footer>
+
+<script>
+  function total() {
+    const amount = document.getElementById("amount");
+    const price = document.getElementById("proce");
+    baga = price / amount;
+    document.getElementById("proce").value = baga * amount;
+  }
+</script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

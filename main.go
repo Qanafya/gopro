@@ -36,11 +36,11 @@ type Detail struct {
 	Id    int
 	Name  string
 	Desc  string
-	Price int
 	Foto1 string
 	Foto2 string
 	Foto3 string
 	Foto4 string
+	Price int
 }
 type Detailf struct {
 	Rating float32
@@ -53,22 +53,22 @@ type Detailf struct {
 	Foto3  string
 	Foto4  string
 }
-type User struct {
-	id       int
-	users    string
-	email    string
-	password string
+type Detaila struct {
+	Amount int
+	Id     int
+	Name   string
+	Desc   string
+	Price  int
+	Foto1  string
+	Foto2  string
+	Foto3  string
+	Foto4  string
 }
 type Comment struct {
 	Id         int
 	Product_id int
 	Name       string
 	Comment    string
-}
-type Demo struct {
-	id     int
-	price  int
-	amount int
 }
 type Rating struct {
 	Id         int
@@ -77,6 +77,11 @@ type Rating struct {
 }
 type Rat struct {
 	Rating float32
+}
+type Purchase struct {
+	Id         int
+	Product_id int
+	Amount     int
 }
 
 var e int
@@ -121,7 +126,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(details)
 		t.Execute(w, details)
 	})
 	r.HandleFunc("/register", func(w http.ResponseWriter, r *http.Request) {
@@ -185,22 +189,25 @@ func main() {
 			}
 			account = append(account, a)
 		}
+		var u = "http://localhost:8000/products"
+
 		if len(account) > 0 {
 			fmt.Println(account[0].password, " and ", password)
 			if account[0].password == password {
-				str := "Welcome to the site, " + users
-				tpl.ExecuteTemplate(w, "login.html", str)
+				http.Redirect(w, r, u, http.StatusSeeOther)
 			} else {
-				tpl.ExecuteTemplate(w, "login.html", "password is not correct")
+				tpl.ExecuteTemplate(w, "template.html", "password is not correct")
 			}
 		} else {
-			tpl.ExecuteTemplate(w, "login.html", "user not found")
+			tpl.ExecuteTemplate(w, "template.html", "user not found")
 		}
 	})
 	r.HandleFunc("/filter/", func(w http.ResponseWriter, r *http.Request) {
-		price := r.FormValue("price")
-		rating := r.FormValue("rating")
-		rows, err := db.Query("select a.rat, d.Id, d.Name, d.Desc, d.Foto1, d.Foto2, d.Foto3, d.Foto4, d.Price from detail d join (select product_id, avg(rating) as rat from rating group by product_id) a on d.id = a.product_id where a.rat > ? and d.Price > ?;", rating, price)
+		price_min := r.FormValue("price")
+		price_max := r.FormValue("price2")
+		rating_min := r.FormValue("rating")
+		rating_max := r.FormValue("rating2")
+		rows, err := db.Query("select a.rat, d.Id, d.Name, d.Desc, d.Foto1, d.Foto2, d.Foto3, d.Foto4, d.Price from detail d join (select product_id, avg(rating) as rat from rating group by product_id) a on d.id = a.product_id where a.rat > ? and a.rat < ? and d.Price > ? and d.Price < ?;", rating_min, rating_max, price_min, price_max)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -218,12 +225,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(details)
 		t.Execute(w, details)
 	})
 	r.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
 		soz := r.FormValue("search")
-		fmt.Println("This is soz:", soz)
 		rows, _ := db.Query("select * from users where users = ?", soz)
 		defer rows.Close()
 		var account []accounts
@@ -235,8 +240,6 @@ func main() {
 			}
 			account = append(account, a)
 		}
-		fmt.Println("This is rows: ", account)
-		//tpl.ExecuteTemplate(w, "template.html", account)
 
 		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprint(w, "<table>")
@@ -291,12 +294,8 @@ func main() {
 		}
 		id := len(count) + 1
 
-		//if ee%2 == 1 {
-		fmt.Println("e equals: ", e, "  length: ", len(comment))
-		fmt.Println("inserting id: ", id, " product_id: ", product_id, " name: ", name, " comment: ", comment)
 		rows, _ := db.Query("insert into comments(id, product_id, name, comment) values (?, ?, ?, ?)", id, product_id, name, comment)
 		defer rows.Close()
-		//}
 		var u = "http://localhost:8000/detail/" + product_id
 		http.Redirect(w, r, u, http.StatusSeeOther)
 
@@ -341,7 +340,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(laptops)
 		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprint(w, "<table>")
 		for _, d := range laptops {
@@ -369,28 +367,93 @@ func main() {
 		tpl.ExecuteTemplate(w, "test.html", demos)
 		fmt.Println(demos)*/
 	})
-	r.HandleFunc("/db", func(w http.ResponseWriter, r *http.Request) {
-		laptop1 := Laptop{
-			Id:    1,
-			Name:  "HP",
-			Star:  2,
-			Price: 800,
-			Photo: "asd",
-		}
-		laptop2 := Laptop{
-			Id:    2,
-			Name:  "Dell",
-			Star:  3,
-			Price: 200,
-			Photo: "asd",
-		}
-		laptop := []Laptop{
-			laptop1,
-			laptop2,
-		}
-		tpl.ExecuteTemplate(w, "test2.html", laptop)
+	r.HandleFunc("/sell/", func(w http.ResponseWriter, r *http.Request) {
+		tpl.ExecuteTemplate(w, "Sell.html", nil)
 	})
+	r.HandleFunc("/filtering/", func(w http.ResponseWriter, r *http.Request) {
+		tpl.ExecuteTemplate(w, "login.html", nil)
+	})
+	r.HandleFunc("/cart/", func(w http.ResponseWriter, r *http.Request) {
+		rows, err := db.Query("select p.amount, d.Id, d.Name, d.Desc, d.Foto1, d.Foto2, d.Foto3, d.foto4, d.Price from purchase p join detail d on p.product_id=d.Id;")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
 
+		details := make([]Detaila, 0)
+		for rows.Next() {
+			var detail Detaila
+			err := rows.Scan(&detail.Amount, &detail.Id, &detail.Name, &detail.Desc, &detail.Foto1, &detail.Foto2, &detail.Foto3, &detail.Foto4, &detail.Price)
+			if err != nil {
+				log.Fatal(err)
+			}
+			details = append(details, detail)
+		}
+		t, err := template.ParseFiles("templates/cart.html")
+		if err != nil {
+			log.Fatal(err)
+		}
+		t.Execute(w, details)
+	})
+	r.HandleFunc("/buy/", func(w http.ResponseWriter, r *http.Request) {
+		product_id := r.FormValue("id")
+		amount := r.FormValue("amount")
+		d, _ := db.Query("select * from purchase")
+		defer d.Close()
+		count := make([]Purchase, 0)
+		for d.Next() {
+			var x Purchase
+			err = d.Scan(&x.Id, &x.Product_id, &x.Amount)
+			if err != nil {
+				panic(err)
+			}
+			count = append(count, x)
+		}
+		id := len(count) + 1
+		row, _ := db.Query("INSERT INTO `first`.`purchase` (`id`, `product_id`, `amount`) VALUES (?, ?, ?);", id, product_id, amount)
+		defer row.Close()
+
+		var u = "http://localhost:8000/cart/"
+		http.Redirect(w, r, u, http.StatusSeeOther)
+	})
+	r.HandleFunc("/selling/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Inserting values")
+		Name := r.FormValue("name")
+		Desc := r.FormValue("desc")
+		Foto1 := r.FormValue("foto1")
+		Foto2 := r.FormValue("foto2")
+		Foto3 := r.FormValue("foto3")
+		Foto4 := r.FormValue("foto4")
+		Price := r.FormValue("price")
+		ee = ee + 1
+		d, _ := db.Query("select * from detail")
+		defer d.Close()
+		count := make([]Detail, 0)
+		for d.Next() {
+			var x Detail
+			err = d.Scan(&x.Id, &x.Name, &x.Desc, &x.Foto1, &x.Foto2, &x.Foto3, &x.Foto4, &x.Price)
+			if err != nil {
+				panic(err)
+			}
+			count = append(count, x)
+		}
+		id := len(count) + 1
+
+		rowd, _ := db.Query("INSERT INTO `first`.`detail` (`Id`, `Name`, `Desc`, `Foto1`, `Foto2`, `Foto3`, `foto4`, `Price`) VALUES (?, ?, ?, ?, ?, ?, ?, ?);", id, Name, Desc, Foto1, Foto2, Foto3, Foto4, Price)
+		defer rowd.Close()
+
+		var u = "http://localhost:8000/products"
+		http.Redirect(w, r, u, http.StatusSeeOther)
+	})
+	r.HandleFunc("/dele/{id}", func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
+		rows, _ := db.Query("delete from purchase where id=?", id)
+		defer rows.Close()
+
+		var u = "http://localhost:8000/cart/"
+		http.Redirect(w, r, u, http.StatusSeeOther)
+	})
 	r.HandleFunc("/detail/{id}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		id := vars["id"]
@@ -446,18 +509,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(details)
 		t.Execute(w, map[string]interface{}{"details": details, "comments": comments, "rats": rats})
-
-		/*fmt.Println(details)
-		w.Header().Set("Content-Type", "text/html")
-		fmt.Fprint(w, "<table>")
-		for _, d := range details {
-			l := "/detail/" + strconv.Itoa(d.Id)
-			//l := "/detail/1"
-			fmt.Fprintf(w, "<tr>id: %d<br>Model: <a href=%s>%s</a><br>Price: %f<br>Rating: %f<br>Photo src: <img src=%s></img><br><br></tr>", d.Id, l, d.Name, d.Price, d.Star, d.Photo)
-		}
-		fmt.Fprint(w, "</table>")*/
 	})
 
 	r.HandleFunc("/detail", func(w http.ResponseWriter, r *http.Request) {
