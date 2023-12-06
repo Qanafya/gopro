@@ -82,6 +82,7 @@ type Purchase struct {
 	Id         int
 	Product_id int
 	Amount     int
+	Active     int
 }
 
 var e int
@@ -374,7 +375,7 @@ func main() {
 		tpl.ExecuteTemplate(w, "login.html", nil)
 	})
 	r.HandleFunc("/cart/", func(w http.ResponseWriter, r *http.Request) {
-		rows, err := db.Query("select p.amount, d.Id, d.Name, d.Desc, d.Foto1, d.Foto2, d.Foto3, d.foto4, d.Price from purchase p join detail d on p.product_id=d.Id;")
+		rows, err := db.Query("select p.amount, d.Id, d.Name, d.Desc, d.Foto1, d.Foto2, d.Foto3, d.foto4, d.Price from purchase p join detail d on p.product_id=d.Id where p.active=1;")
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -403,14 +404,14 @@ func main() {
 		count := make([]Purchase, 0)
 		for d.Next() {
 			var x Purchase
-			err = d.Scan(&x.Id, &x.Product_id, &x.Amount)
+			err = d.Scan(&x.Id, &x.Product_id, &x.Amount, &x.Active)
 			if err != nil {
 				panic(err)
 			}
 			count = append(count, x)
 		}
 		id := len(count) + 1
-		row, _ := db.Query("INSERT INTO `first`.`purchase` (`id`, `product_id`, `amount`) VALUES (?, ?, ?);", id, product_id, amount)
+		row, _ := db.Query("INSERT INTO `first`.`purchase` (`id`, `product_id`, `amount`, `active`) VALUES (?, ?, ?, ?);", id, product_id, amount, 1)
 		defer row.Close()
 
 		var u = "http://localhost:8000/cart/"
@@ -448,7 +449,7 @@ func main() {
 	r.HandleFunc("/dele/{id}", func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		id := vars["id"]
-		rows, _ := db.Query("delete from purchase where id=?", id)
+		rows, _ := db.Query("update purchase set active=0 where product_id=?", id)
 		defer rows.Close()
 
 		var u = "http://localhost:8000/cart/"
